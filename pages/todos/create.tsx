@@ -2,12 +2,15 @@ import PrimaryButton from '@/components/atom/PrimaryButton'
 import Header from '@/components/Header';
 import { db } from '@/lib/firebase';
 import { addDoc, collection } from 'firebase/firestore';
+import { useRouter } from 'next/router';
 import React, {useState} from 'react'
 
 const create = () => {
     const [todoTitle, setTodoTitle] = useState('');
     const [todoBody, setTodoBody] = useState('');
     const [todoStatus, setTodoStatus] = useState('notStarted');
+
+    const router = useRouter();
 
     const handleAddTodo = async (e: React.MouseEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -21,6 +24,7 @@ const create = () => {
                 setTodoTitle('');
                 setTodoBody('');
                 setTodoStatus('notStarted')
+                router.push('/');
             } else {
                 alert('内容を入力してください')
             }
@@ -31,7 +35,7 @@ const create = () => {
   return (
     <>
         <Header />
-        <div className='container mx-auto'>
+        <div className='container mx-auto mt-10'>
             <h2 className='text-3xl font-bold'>TODO 作成</h2>
             <input
                 type='text'
@@ -52,7 +56,7 @@ const create = () => {
                 value={todoStatus}
                 onChange={(e) => setTodoStatus(e.target.value)}
             >
-                <option value='notStarted'>未完了</option>
+                <option value='notStarted'>未着手</option>
                 <option value='inProgress'>作業中</option>
                 <option value='done'>完了</option>
             </select>

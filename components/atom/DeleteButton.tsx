@@ -5,11 +5,11 @@ type Props = {
     onClick?: () => void;
 }
 
-const PrimaryButton: React.FC<Props> = (props) => {
+const DeleteButton: React.FC<Props> = (props) => {
     const {children, onClick} = props;
   return (
     <button className=
-        'text-md rounded-full bg-teal-200 py-2 px-4 my-3 hover:bg-teal-400'
+        'text-md rounded-full bg-red-200 py-2 px-4 my-3 hover:bg-red-400'
         onClick={onClick}
     >
         {children}
@@ -17,4 +17,4 @@ const PrimaryButton: React.FC<Props> = (props) => {
   )
 }
 
-export default PrimaryButton
+export default DeleteButton
