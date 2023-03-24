@@ -3,6 +3,7 @@ import PrimaryButton from '@/components/atom/PrimaryButton';
 import Header from '@/components/Header';
 import { db } from '@/lib/firebase';
 import { deleteDoc, doc } from 'firebase/firestore';
+import Link from 'next/link';
 import { useRouter } from 'next/router'
 import React, { FC } from 'react'
 import { status } from '../index';
@@ -19,6 +20,8 @@ export default function TodoDetail() {
         router.push('/');
         }
     }
+
+    const todoInfo = {id: router.query.id, title: router.query.title, body: router.query.body, status: router.query.status}
 
     return (
         <>
@@ -40,7 +43,11 @@ export default function TodoDetail() {
                 </p>
             
                 <br />
-                <span className='mr-10'><PrimaryButton>編集する</PrimaryButton></span>
+                <span className='mr-10'><PrimaryButton>
+                    <Link href={{ pathname: `/todos/${router.query.id}/edit`, query: todoInfo}}>
+                        編集する
+                    </Link>
+                </PrimaryButton></span>
                 <DeleteButton onClick={() => onClickDelete(router.query.id as string)}>削除する</DeleteButton>
             </div>
         </>
